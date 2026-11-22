@@ -1,0 +1,29 @@
+{% extends "myapp/base.html" %}
+
+{% block title %}Crear programa{% endblock %}
+
+{% block content %}
+<section class="card shadow-sm mx-auto" style="max-width: 720px;">
+    <div class="card-body p-4 p-md-5">
+        <h1 class="h3 mb-2">Crear programa académico</h1>
+        <p class="text-secondary mb-4">Completa los datos para registrar un programa.</p>
+        <form method="post" novalidate>
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="mb-3">
+                    {% if field.name == "estado" %}
+                        <div class="form-check">{{ field }} <label class="form-check-label" for="{{ field.id_for_label }}">{{ field.label }}</label></div>
+                    {% else %}
+                        <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                    {% endif %}
+                    {% for error in field.errors %}<div class="text-danger small">{{ error }}</div>{% endfor %}
+                </div>
+            {% endfor %}
+            {% if form.non_field_errors %}<div class="alert alert-danger">{{ form.non_field_errors }}</div>{% endif %}
+            <button class="btn btn-primary" type="submit">Guardar programa</button>
+            <a class="btn btn-outline-secondary ms-2" href="/admin/myapp/programa/">Ver administrador</a>
+        </form>
+    </div>
+</section>
+{% endblock %}

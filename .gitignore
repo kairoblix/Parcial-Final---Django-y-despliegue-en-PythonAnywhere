@@ -1,0 +1,7 @@
+# Archivos temporales de Python y entornos locales.
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+staticfiles/
